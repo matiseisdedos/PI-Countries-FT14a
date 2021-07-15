@@ -20,7 +20,7 @@ export default function CountriesCards() {
                 return (
                     <div>
                         <p>{country.name}</p>
-                        <img src={country.flag} alt="No se encontro bandera" />
+                        <img src={country.flag} alt="No se encontro bandera" height="200" />
                     </div>
                 );
             })}</div>)
