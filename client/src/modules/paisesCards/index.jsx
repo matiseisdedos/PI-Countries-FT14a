@@ -8,7 +8,7 @@ export default function CountriesCards() {
     const [countries, setCountries] = useState([])
 
     function getCountries() {
-        return axios.get("http://localhost:3001/countries")
+        return axios.get(COUNTRIES_URL)
             .then(countries => setCountries(countries.data))
     }
     useEffect(() => {
@@ -18,7 +18,7 @@ export default function CountriesCards() {
         <div>
             {countries.map((country) => {
                 return (
-                    <div>
+                    <div key={country.alpha3Code}>
                         <p>{country.name}</p>
                         <img src={country.flag} alt="No se encontro bandera" height="200" />
                     </div>

@@ -1,11 +1,15 @@
 import './App.css';
 import PaisesCards from './modules/paisesCards';
+import { Route } from 'react-router-dom'
+import WelcomePage from './modules/welcome/Welcome';
 
 function App() {
   return (
-    <div className="App">
-      <h1><PaisesCards /></h1>
-    </div>
+    <>
+      <Route exact path="/" component={WelcomePage} />
+      <Route exact path="/countries" component={PaisesCards} />
+
+    </>
   );
 }
 
