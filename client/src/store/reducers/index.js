@@ -1,7 +1,9 @@
 import { GET_COUNTRIES } from "../actions/countriesActions";
+import { ADD_ACT } from "../actions/addAct";
 
 const initialState = {
-    countries: []
+    countries: [],
+    activity: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,6 +13,12 @@ const reducer = (state = initialState, action) => {
                 ...state,
                 countries: action.payload
             }
+        case ADD_ACT: {
+            return {
+                ...state,
+                activity: action.payload
+            }
+        }
 
 
         default:
