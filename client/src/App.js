@@ -8,7 +8,6 @@ function App() {
     <>
       <Route exact path="/" component={WelcomePage} />
       <Route exact path="/countries" component={PaisesCards} />
-
     </>
   );
 }
