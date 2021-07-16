@@ -31,6 +31,15 @@ router.get("/countries", async (req, res) => {
     //         return res.send('No se encontro el pais ingresado')
     //     }
     // }
+    if (name !== undefined) {
+
+        countries.forEach(e => {
+            if (e.name.includes(name)) {
+                search.push(e)
+            }
+        })
+        return res.send(search)
+    }
     for (let i = 0; i < 10; i++) {
         firstTen.push(countries[i])
     }
