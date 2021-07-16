@@ -7,7 +7,7 @@ import { getCountries } from "../../store/actions/countriesActions"
 
 
 
-function CountriesCards(countries, getCountries) {
+function CountriesCards({ countries, getCountries }) {
 
     function getCountriesFunction() {
         getCountries();
