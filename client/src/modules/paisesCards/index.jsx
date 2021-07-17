@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Link } from "react-router-dom";
 import { getCountries } from "../../store/actions/countriesActions"
 import PaisCard from "../paisCard/paisCard";
+import './index.modules.css'
+import { IoIosSearch } from "react-icons/io";
 
 
 
@@ -19,10 +21,10 @@ function CountriesCards({ countries, getCountries }) {
         <>
             <form>
                 <input placeholder="Busqueda..." />
-                <button>Search</button>
+                <button><IoIosSearch /></button>
             </form>
 
-            <div className="Cards">
+            <div className="cards">
                 {countries.map(c => <PaisCard
                     id={c.alpha3Code}
                     key={c.alpha3Code}

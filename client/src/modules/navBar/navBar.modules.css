@@ -1,0 +1,12 @@
+.navBar{
+    min-height: 30px;
+    background-color: rgba(0,0,0,0.92);
+    display: flex;
+    align-items: center;
+}
+.navBar a{
+    margin: 0 auto;
+}
+.navBar a:hover{
+    color: #b72c31;
+}

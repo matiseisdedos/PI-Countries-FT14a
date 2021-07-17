@@ -1,0 +1,14 @@
+.pais{
+    background-color: #ecedef;
+    display: block;
+    margin: 10px;
+    text-align: center;
+    height: 200px;
+    border-radius: 10px;
+}
+.pais a{
+    color: black;
+}
+.pais a:hover{
+    color: #b72c31;
+}
