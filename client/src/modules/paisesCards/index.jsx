@@ -1,9 +1,9 @@
 //Aca se generan y se muestran los paises
-import { useState, useEffect } from "react"
-import axios from "axios"
-import { COUNTRIES_URL } from "../../constants"
+import { useEffect } from "react"
 import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
 import { getCountries } from "../../store/actions/countriesActions"
+import PaisCard from "../paisCard/paisCard";
 
 
 
@@ -22,16 +22,19 @@ function CountriesCards({ countries, getCountries }) {
                 <button>Search</button>
             </form>
 
-            <div>
-                {countries.map((country) => {
-                    return (
-                        <div key={country.alpha3Code}>
-                            <p>{country.name}</p>
-                            <img src={country.flag} alt="No se encontro bandera" height="200" />
-                            <p>{country.region}</p>
-                        </div>
-                    );
-                })}</div>
+            <div className="Cards">
+                {countries.map(c => <PaisCard
+                    id={c.alpha3Code}
+                    key={c.alpha3Code}
+                    name={c.name}
+                    flag={c.flag}
+                    region={c.region}
+                    capital={c.capital}
+                    subregion={c.subregion}
+                    area={c.area}
+                    population={c.population}
+                />)}
+            </div>
         </>
     )
 }
