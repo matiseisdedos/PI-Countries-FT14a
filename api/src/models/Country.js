@@ -1,19 +1,21 @@
 const { DataTypes } = require('sequelize');
+const { v4: uuidv4 } = require('uuid');
 
 module.exports = (sequelize) => {
 
   sequelize.define('country', {
     id: {
-      type: DataTypes.STRING(3),
+      type: DataTypes.UUID,
       allowNull: false,
-      primaryKey: true
+
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true
     },
     imgflag: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false
     },
     continent: {
@@ -28,10 +30,10 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING
     },
     area: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     population: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     }
   });
 };

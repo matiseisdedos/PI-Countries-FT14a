@@ -2,6 +2,7 @@ const { Router } = require("express")
 const { Country } = require("../db")
 const { Op } = require('sequelize')
 const axios = require("axios")
+const { v4: uuidv4 } = require('uuid');
 
 const router = Router();
 /* GET /countries?name="...":
@@ -10,13 +11,28 @@ Si no existe ningún país mostrar un mensaje adecuado*/
 
 
 router.get("/countries", async (req, res) => {
-    let database = await Country.findAll()
+
     let api = await axios.get("https://restcountries.eu/rest/v2/all")
-    let countries = [...database, ...api.data]
-    let firstTen = []
-    const name = req.query.name
-    console.log(name);
-    let search = []
+    api.data.map(c => {
+        Country.create({
+            id: uuidv4(),
+            name: c.name,
+            imgflag: c.flag,
+            continent: c.region,
+            capital: c.capital,
+            subregion: c.subregion,
+            area: c.area,
+            population: c.population,
+        })
+    })
+    let database = await Country.findAll()
+    // let countries = [...database, ...api.data]
+    // let firstTen = []
+    // const name = req.query.name
+    // console.log(name);
+    // let search = []
+
+
     // if (name !== undefined) {
     //     if (name.length > 0 && name.length < 3) {
     //         search = countries.filter(e => e.alpha2Code === name)
@@ -31,19 +47,19 @@ router.get("/countries", async (req, res) => {
     //         return res.send('No se encontro el pais ingresado')
     //     }
     // }
-    if (name !== undefined) {
+    // if (name !== undefined) {
 
-        countries.forEach(e => {
-            if (e.name.includes(name)) {
-                search.push(e)
-            }
-        })
-        return res.send(search)
-    }
-    for (let i = 0; i < 10; i++) {
-        firstTen.push(countries[i])
-    }
-    res.send(firstTen)
+    //     countries.forEach(e => {
+    //         if (e.name.includes(name)) {
+    //             search.push(e)
+    //         }
+    //     })
+    //     return res.send(search)
+    // }
+    // for (let i = 0; i < 10; i++) {
+    //     firstTen.push(countries[i])
+    // }
+    res.send(database)
 })
 /*GET /countries/{idPais}:
 
@@ -53,12 +69,14 @@ router.get("/countries", async (req, res) => {
 */
 
 router.get('/countries/:id', async (req, res) => {
-    let id = req.params.id
-    id = id.toLowerCase()
-    let database = await Country.findAll()
-    let api = await axios.get(`https://restcountries.eu/rest/v2/alpha/${id}`)
-    console.log(id)
-    res.send(api.data)
+    let idbase = req.params.id
+    let database = await Country.findAll({
+        where: {
+            id: idbase
+        }
+    })
+    res.send(database)
+    //res.send(database.filter(e => e.id === id))
     // falta agregar actividades de la base de datos
 })
 
