@@ -80,4 +80,30 @@ router.get('/countries/:id', async (req, res) => {
     // falta agregar actividades de la base de datos
 })
 
+router.get("/countries/order/:orden", async (req, res) => {
+    let orden = req.params.orden
+    let database;
+    if (orden === "DESCP") {
+        database = await Country.findAll({
+            order: [['population', 'DESC']]
+        })
+    }
+    if (orden === "ASCP") {
+        database = await Country.findAll({
+            order: [['population', 'ASC']]
+        })
+    }
+    if (orden === "ASC") {
+        database = await Country.findAll({
+            order: [['name', 'ASC']]
+        })
+    }
+    if (orden === "DESC") {
+        database = await Country.findAll({
+            order: [['name', 'DESC']]
+        })
+    }
+    res.send(database)
+})
+
 module.exports = router
