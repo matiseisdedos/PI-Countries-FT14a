@@ -79,7 +79,12 @@ router.get('/countries/:id', async (req, res) => {
     //res.send(database.filter(e => e.id === id))
     // falta agregar actividades de la base de datos
 })
-
+router.get("/countries/filter/:continent", async (req, res) => {
+    //let continent = req.params.continent
+    let continent = req.params.continent
+    let database = await Country.findAll()
+    res.send(database.filter(e => e.continent === continent))
+})
 router.get("/countries/order/:orden", async (req, res) => {
     let orden = req.params.orden
     let database;
