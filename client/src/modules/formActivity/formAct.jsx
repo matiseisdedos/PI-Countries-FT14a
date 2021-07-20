@@ -11,8 +11,10 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
     async function getCountriesFunction() {
         await getCountries();
     }
+
     useEffect(() => {
         getCountriesFunction()
+        console.log(countries)
     }, [])
 
     const handleOnSubmit = function (e) {
