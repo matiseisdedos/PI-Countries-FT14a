@@ -8,7 +8,7 @@ export function searchCountries(country) {
             .then((response) => {
                 dispatch({
                     type: SEARCH_COUNTRIES,
-                    payload: response.data.filter(e => e.name == country)
+                    payload: response.data.filter(e => e.name === country)
                 })
             })
     }

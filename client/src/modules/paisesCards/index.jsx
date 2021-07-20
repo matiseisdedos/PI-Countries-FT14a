@@ -7,29 +7,29 @@ import PaisCard from "../paisCard/paisCard";
 import './index.modules.css'
 import { IoIosSearch } from "react-icons/io";
 import { searchCountries } from "../../store/actions/search"
+import { getOrder } from "../../store/actions/order";
 
 
 
-function CountriesCards({ countries, getCountries, searchCountries, search }) {
-    async function searchCountriesFunction(state) {
-        await searchCountries(state)
-    }
+function CountriesCards({ countries, getCountries, searchCountries, search, getOrder }) {
 
     function getCountriesFunction() {
         getCountries();
     }
     useEffect(() => {
         getCountriesFunction()
-        searchCountriesFunction(state)
     }, [])
     async function handleOnSubmit(e) {
         e.preventDefault()
-        console.log(searchCountriesFunction(state))
-        console.log(state)
-        console.log(search)
+        searchCountries(state.search)
+    }
+    async function handleOnSubmitOrder(e) {
+        e.preventDefault()
+        getOrder(state.orden)
     }
     const [state, setState] = useState({
         search: '',
+        orden: ''
     })
     function handleChange(e) {
         setState({
@@ -38,6 +38,7 @@ function CountriesCards({ countries, getCountries, searchCountries, search }) {
         })
     }
 
+
     return (
         <>
             <form onSubmit={handleOnSubmit}>
@@ -45,6 +46,18 @@ function CountriesCards({ countries, getCountries, searchCountries, search }) {
                 <button><IoIosSearch /></button>
             </form>
 
+            <form onSubmit={handleOnSubmitOrder}>
+                <select onChange={handleChange} name="orden">
+                    <option selected disabled>Seleccione</option>
+                    <option value="DESCP"> Mayor Poblacion</option>
+                    <option onChange={handleChange} value="ASCP"> Menor Poblacion</option>
+                    <option onChange={handleChange} value="ASC"> Nombre A-Z</option>
+                    <option onChange={handleChange} value="DESC"> Nombre Z-A</option>
+                </select>
+                <button>Ordenar</button>
+            </form>
+
+            {/* <button type="submit" name="orden" value="DESCP" onClick={handleChange, handleOnSubmit}>Orden</button> */}
             <div className="cards">
                 {countries.map(c => <PaisCard
                     id={c.id}
@@ -65,7 +78,6 @@ function CountriesCards({ countries, getCountries, searchCountries, search }) {
 const mapStateToProps = state => {
     return {
         countries: state.countries,
-        search: state.search
     }
 }
 const mapDispatchToProps = dispatch => {
@@ -75,6 +87,9 @@ const mapDispatchToProps = dispatch => {
         },
         searchCountries: country => {
             dispatch(searchCountries(country))
+        },
+        getOrder: order => {
+            dispatch(getOrder(order))
         }
     }
 }
