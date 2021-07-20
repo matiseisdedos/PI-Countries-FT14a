@@ -8,7 +8,7 @@ export default function NavBar() {
             <Link to="/">Start</Link>
             <Link to="/countries">Home</Link>
             <Link to="#">About</Link>
-            <Link to="#">NewActivity</Link>
+            <Link to="/activity">NewActivity</Link>
         </div>
     )
 }

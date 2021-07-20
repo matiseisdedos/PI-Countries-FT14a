@@ -3,14 +3,18 @@ import axios from 'axios'
 import { ADD_ACT_URL } from '../../constants'
 
 export const ADD_ACT = "ADD_ACT"
-export function addActivity() {
-    return function (dispatch) {
-        return axios.post(ADD_ACT_URL)
-            .then((response) => {
-                dispatch({
-                    type: ADD_ACT,
-                    payload: response.data
-                })
-            })
+export function addActivity(state) {
+    return async function (dispatch) {
+        return await axios({
+            method: 'post',
+            url: ADD_ACT_URL,
+            data: {
+                name: state.name,
+                level: state.level,
+                length: parseInt(state.length),
+                season: state.season,
+                countries: state.countries
+            }
+        })
     }
 }

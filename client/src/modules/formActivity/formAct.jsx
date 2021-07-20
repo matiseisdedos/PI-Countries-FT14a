@@ -1,21 +1,24 @@
 import React from "react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { connect } from 'react-redux'
 import { addActivity } from "../../store/actions/addAct"
+import { getCountries } from "../../store/actions/countriesActions"
 
-
-
-function FormAct({ activities, addActivity }) {
+function FormAct({ countries, activities, addActivity, getCountries }) {
     // function addActivityFunction() {
     //     addActivity();
     // }
-    // useEffect(() => {
-    //     addActivityFunction()
-    // }, [])
+    async function getCountriesFunction() {
+        await getCountries();
+    }
+    useEffect(() => {
+        getCountriesFunction()
+    }, [])
 
     const handleOnSubmit = function (e) {
         e.preventDefault()
         addActivity(state)
+        console.log(state)
         setState({
             name: '',
             level: '',
@@ -52,10 +55,19 @@ function FormAct({ activities, addActivity }) {
                 <br></br>
                 <label>Season: </label>
                 <select value={state.season} onChange={handleChange} name="season">
+                    <option disabled value="selected">Select</option>
                     <option>Summer</option>
                     <option>Autumn</option>
                     <option>Winter</option>
                     <option>Spring</option>
+                </select>
+                <br></br>
+                <select>
+                    {
+                        countries.map(e => {
+                            <option>{e.name}</option>
+                        })
+                    }
                 </select>
                 <br></br>
                 <button>Crear</button>
@@ -67,13 +79,17 @@ function FormAct({ activities, addActivity }) {
 
 const mapStateToProps = state => {
     return {
-        activities: state.activities
+        activities: state.activities,
+        countries: state.countries
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
         addActivity: activity => {
             dispatch(addActivity(activity))
+        },
+        getCountries: countries => {
+            dispatch(getCountries(countries))
         }
     }
 }

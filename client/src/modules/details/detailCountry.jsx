@@ -12,17 +12,13 @@ function DetailCountry(props) {
     useEffect(() => {
         detailCountryFunction(id)
     }, [])
-    // function componentDidMount() {
-    //     const id = props.match.params.alpha3Code;
-    //     props.getDetail(id);
-    // }
     return (
         <>
             {/*id, name, flag, region, capital, subregion, area, population }*/}
             <div className="detailCountry">
-                <h3>{props.country.name}</h3>
-                <img src={props.country.flag} alt="No se encontro bandera" height="200px" />
-                <p> Continent: {props.country.region}</p>
+                <h3>Name: {props.country.name}</h3>
+                <img src={props.country.imgflag} alt="No se encontro bandera" height="200px" />
+                <p> Continent: {props.country.continent}</p>
                 <p> SubRegion: {props.country.subregion}</p>
                 <p> Area: {props.country.area}</p>
                 <p> Population: {props.country.population}</p>

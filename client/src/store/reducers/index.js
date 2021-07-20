@@ -1,11 +1,13 @@
 import { GET_COUNTRIES } from "../actions/countriesActions";
 import { ADD_ACT } from "../actions/addAct";
 import { GET_DETAIL } from "../actions/countryDetail";
+import { SEARCH_COUNTRIES } from "../actions/search";
 
 const initialState = {
     countries: [],
     activity: [],
-    country: {}
+    country: {},
+    search: []
 }
 
 const reducer = (state = initialState, action) => {
@@ -24,7 +26,12 @@ const reducer = (state = initialState, action) => {
         case GET_DETAIL:
             return {
                 ...state,
-                country: action.payload
+                country: action.payload[0]
+            }
+        case SEARCH_COUNTRIES:
+            return {
+                ...state,
+                search: action.payload
             }
 
 
