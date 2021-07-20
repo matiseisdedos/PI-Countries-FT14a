@@ -13,53 +13,24 @@ Si no existe ningún país mostrar un mensaje adecuado*/
 router.get("/countries", async (req, res) => {
 
     let api = await axios.get("https://restcountries.eu/rest/v2/all")
-    api.data.map(c => {
-        Country.create({
-            id: uuidv4(),
-            name: c.name,
-            imgflag: c.flag,
-            continent: c.region,
-            capital: c.capital,
-            subregion: c.subregion,
-            area: c.area,
-            population: c.population,
-        })
-    })
     let database = await Country.findAll()
-    // let countries = [...database, ...api.data]
-    // let firstTen = []
-    // const name = req.query.name
-    // console.log(name);
-    // let search = []
-
-
-    // if (name !== undefined) {
-    //     if (name.length > 0 && name.length < 3) {
-    //         search = countries.filter(e => e.alpha2Code === name)
-    //         if (search.length === 0) return res.send('No se encontro el pais ingresado')
-    //         return res.send(search)
-    //     } else if (name.length === 3) {
-    //         search = countries.filter(e => e.alpha3Code === name)
-    //         if (search.length === 0) return res.send('No se encontro el pais ingresado')
-    //         return res.send(search)
-    //     }
-    //     else {
-    //         return res.send('No se encontro el pais ingresado')
-    //     }
-    // }
-    // if (name !== undefined) {
-
-    //     countries.forEach(e => {
-    //         if (e.name.includes(name)) {
-    //             search.push(e)
-    //         }
-    //     })
-    //     return res.send(search)
-    // }
-    // for (let i = 0; i < 10; i++) {
-    //     firstTen.push(countries[i])
-    // }
-    res.send(database)
+    console.log(database.length)
+    if (database.length === 249) return res.send(database)
+    else {
+        api.data.map(c => {
+            Country.create({
+                id: uuidv4(),
+                name: c.name,
+                imgflag: c.flag,
+                continent: c.region,
+                capital: c.capital,
+                subregion: c.subregion,
+                area: c.area,
+                population: c.population,
+            })
+        })
+        res.send(database)
+    }
 })
 /*GET /countries/{idPais}:
 
