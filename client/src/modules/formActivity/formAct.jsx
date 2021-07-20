@@ -18,7 +18,6 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
     const handleOnSubmit = function (e) {
         e.preventDefault()
         addActivity(state)
-        console.log(state)
         setState({
             name: '',
             level: '',

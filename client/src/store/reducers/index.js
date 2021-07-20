@@ -3,6 +3,7 @@ import { ADD_ACT } from "../actions/addAct";
 import { GET_DETAIL } from "../actions/countryDetail";
 import { SEARCH_COUNTRIES } from "../actions/search";
 import { GET_ORDER } from "../actions/order";
+import { FILTER_CONTINENT } from "../actions/getContinents";
 
 const initialState = {
     countries: [],
@@ -35,6 +36,11 @@ const reducer = (state = initialState, action) => {
                 countries: action.payload
             }
         case GET_ORDER:
+            return {
+                ...state,
+                countries: action.payload
+            }
+        case FILTER_CONTINENT:
             return {
                 ...state,
                 countries: action.payload

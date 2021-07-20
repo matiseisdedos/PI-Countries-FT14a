@@ -8,10 +8,11 @@ import './index.modules.css'
 import { IoIosSearch } from "react-icons/io";
 import { searchCountries } from "../../store/actions/search"
 import { getOrder } from "../../store/actions/order";
+import { filterContinent } from "../../store/actions/getContinents";
 
 
 
-function CountriesCards({ countries, getCountries, searchCountries, search, getOrder }) {
+function CountriesCards({ countries, getCountries, searchCountries, search, getOrder, filterContinent }) {
 
     function getCountriesFunction() {
         getCountries();
@@ -27,9 +28,14 @@ function CountriesCards({ countries, getCountries, searchCountries, search, getO
         e.preventDefault()
         getOrder(state.orden)
     }
+    async function handleOnSubmitFilter(e) {
+        e.preventDefault()
+        filterContinent(state.filter)
+    }
     const [state, setState] = useState({
         search: '',
-        orden: ''
+        orden: '',
+        filter: ''
     })
     function handleChange(e) {
         setState({
@@ -50,13 +56,25 @@ function CountriesCards({ countries, getCountries, searchCountries, search, getO
                 <select onChange={handleChange} name="orden">
                     <option selected disabled>Seleccione</option>
                     <option value="DESCP"> Mayor Poblacion</option>
-                    <option onChange={handleChange} value="ASCP"> Menor Poblacion</option>
-                    <option onChange={handleChange} value="ASC"> Nombre A-Z</option>
-                    <option onChange={handleChange} value="DESC"> Nombre Z-A</option>
+                    <option value="ASCP"> Menor Poblacion</option>
+                    <option value="ASC"> Nombre A-Z</option>
+                    <option value="DESC"> Nombre Z-A</option>
+                </select>
+
+                <button>Ordenar</button>
+            </form>
+            <form onSubmit={handleOnSubmitFilter}>
+                <select onChange={handleChange} name="filter" >
+                    <option selected disabled>Seleccione...</option>
+                    <option value="Africa">Africa</option>
+                    <option value="Americas">Americas</option>
+                    <option value="Asia">Asia</option>
+                    <option value="Europe">Europe</option>
+                    <option value="Polar">Polar</option>
+                    <option value="Oceania">Oceania</option>
                 </select>
                 <button>Ordenar</button>
             </form>
-
             {/* <button type="submit" name="orden" value="DESCP" onClick={handleChange, handleOnSubmit}>Orden</button> */}
             <div className="cards">
                 {countries.map(c => <PaisCard
@@ -90,6 +108,9 @@ const mapDispatchToProps = dispatch => {
         },
         getOrder: order => {
             dispatch(getOrder(order))
+        },
+        filterContinent: continent => {
+            dispatch(filterContinent(continent))
         }
     }
 }
