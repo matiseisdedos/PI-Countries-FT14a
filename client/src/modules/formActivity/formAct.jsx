@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import { connect } from 'react-redux'
 import { addActivity } from "../../store/actions/addAct"
 import { getCountries } from "../../store/actions/countriesActions"
-
+import "./formAct.css"
 function FormAct({ countries, activities, addActivity, getCountries }) {
     // function addActivityFunction() {
     //     addActivity();
@@ -61,9 +61,9 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
 
     return (
         <>
-            <form onSubmit={handleOnSubmit}>
+            <form onSubmit={handleOnSubmit} className="form">
                 <label>Name: </label>
-                <input name="name" placeholder="activity" value={state.name} onChange={handleChange} />
+                <input required name="name" placeholder="activity" value={state.name} onChange={handleChange} />
                 <br></br>
                 <label>Level: </label>
                 <input type="number" min="1" max="5" name="level" placeholder="1 Min - 5 Max" value={state.level} onChange={handleChange} />
@@ -73,13 +73,14 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
                 <br></br>
                 <label>Season: </label>
                 <select value={state.season} onChange={handleChange} name="season">
-                    <option disabled value="selected">Select</option>
+                    <option selected>Select...</option>
                     <option>Summer</option>
                     <option>Autumn</option>
                     <option>Winter</option>
                     <option>Spring</option>
                 </select>
                 <br></br>
+                <label>Countries</label>
                 <select onChange={handleAddCountries}>
                     {
                         countries?.map(e =>

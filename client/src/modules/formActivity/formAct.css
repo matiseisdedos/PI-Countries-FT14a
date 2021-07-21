@@ -1,0 +1,19 @@
+.form{
+    background-color: #ecedef;
+    margin: 0 auto;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 10%;
+    margin-top: 100px;
+    border-radius: 10px;
+    border: solid 1px black;
+}
+.form input, select{
+    grid-column-start: 2;
+    grid-column-end: 4;
+}
+.form label{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}

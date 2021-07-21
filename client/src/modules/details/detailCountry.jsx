@@ -11,7 +11,9 @@ function DetailCountry(props) {
     }
     useEffect(() => {
         detailCountryFunction(id)
+
     }, [])
+    console.log(props)
     return (
         <>
             {/*id, name, flag, region, capital, subregion, area, population }*/}
@@ -22,6 +24,18 @@ function DetailCountry(props) {
                 <p> SubRegion: {props.country.subregion}</p>
                 <p> Area: {props.country.area}</p>
                 <p> Population: {props.country.population}</p>
+            </div>
+            <div className='activities'>
+                {
+                    props.country.activities?.map(e =>
+                        <div className="activity">
+                            <h3>{e.name}</h3>
+                            <p>Difficulty: {e.level}</p>
+                            <p>Length: {e.length} hs</p>
+                            <p>Season: {e.season}</p>
+                        </div>
+                    )
+                }
             </div>
         </>
     )

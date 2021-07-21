@@ -14,3 +14,15 @@ a{
 .detailCountry h3{
     text-transform: uppercase;
 }
+.activities{
+    display: grid;
+    margin: 0 auto;
+    max-width: 90%;
+    grid-template-columns: repeat(4, 1fr);
+}
+.activity{
+    background-color: #ecedef;
+    margin: 10px;
+    border-radius: 10px;
+    text-align: center;
+}
