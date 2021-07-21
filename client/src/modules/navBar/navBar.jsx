@@ -7,7 +7,7 @@ export default function NavBar() {
         <div className="navBar">
             <Link to="/">Start</Link>
             <Link to="/app/countries">Home</Link>
-            <Link to="#">About</Link>
+            {/* <Link to="#">About</Link> */}
             <Link to="/app/activity">NewActivity</Link>
         </div>
     )

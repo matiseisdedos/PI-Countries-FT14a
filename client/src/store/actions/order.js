@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { COUNTRIES_URL } from '../../constants'
 
 export const GET_ORDER = "GET_ORDER"
 export function getOrder(orden) {

@@ -12,7 +12,7 @@ button, select, option, input{
     background-color: black;
     color: white;
     padding: 5px;
-    border: none;
+    border-color: black;
 }
 .filtrados{
     margin: 5px;

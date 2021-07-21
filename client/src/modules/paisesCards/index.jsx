@@ -1,7 +1,6 @@
 //Aca se generan y se muestran los paises
 import { useEffect, useState } from "react"
 import { connect } from 'react-redux'
-import { Link } from "react-router-dom";
 import { getCountries } from "../../store/actions/countriesActions"
 import PaisCard from "../paisCard/paisCard";
 import './index.modules.css'
@@ -13,19 +12,17 @@ import { filterContinent } from "../../store/actions/getContinents";
 
 
 function CountriesCards({ countries, getCountries, searchCountries, search, getOrder, filterContinent }) {
+    // Para paginacion y pantalla de carga
+    // const [paises, setPaises] = useState([]);
+    // const [loading, setLoading] = useState(false);
+    // const [currentPage, setCurrentPage] = useState(1);
+    // const [paisesPorPagina, setPaisesPorPagina] = useState(10);
 
-    const [paises, setPaises] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [paisesPorPagina, setPaisesPorPagina] = useState(10);
 
 
 
-    function getCountriesFunction() {
-        getCountries();
-    }
     useEffect(() => {
-        getCountriesFunction()
+        getCountries()
     }, [])
     async function handleOnSubmit(e) {
         e.preventDefault()
@@ -75,7 +72,7 @@ function CountriesCards({ countries, getCountries, searchCountries, search, getO
 
                 <form onSubmit={handleOnSubmitFilter}>
                     <select onChange={handleChange} name="filter" >
-                        <option selected disabled>Seleccione...</option>
+                        <option defaultValue disabled>Seleccione...</option>
                         <option value="Africa">Africa</option>
                         <option value="Americas">Americas</option>
                         <option value="Asia">Asia</option>

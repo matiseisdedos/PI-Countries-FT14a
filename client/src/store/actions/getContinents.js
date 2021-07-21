@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { COUNTRIES_URL } from '../../constants'
 
 export const FILTER_CONTINENT = "FILTER_CONTINENT"
 export function filterContinent(continent) {
