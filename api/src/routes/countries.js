@@ -1,5 +1,5 @@
 const { Router } = require("express")
-const { Country } = require("../db")
+const { Country, Activity } = require("../db")
 const { Op } = require('sequelize')
 const axios = require("axios")
 const { v4: uuidv4 } = require('uuid');
@@ -46,7 +46,10 @@ router.get('/countries/:id', async (req, res) => {
             id: idbase
         }
     })
-    res.send(database)
+    let activities = await Activity.findAll({ where: { id: idbase } })
+    console.log(activities)
+    let all = [...database, ...activities]
+    res.send(all)
     //res.send(database.filter(e => e.id === id))
     // falta agregar actividades de la base de datos
 })

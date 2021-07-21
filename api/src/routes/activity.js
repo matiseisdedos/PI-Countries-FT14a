@@ -1,7 +1,9 @@
 const { Router } = require("express")
 const { Activity } = require("../db")
 const axios = require("axios")
+const { Op } = require("sequelize")
 const { v4: uuidv4 } = require('uuid');
+const { Country } = require("../db");
 
 const router = Router();
 
@@ -10,17 +12,18 @@ Recibe los datos recolectados desde el formulario controlado de la ruta de creac
 Crea una actividad turística en la base de datos*/
 
 router.post("/activity", async (req, res) => {
-    const country = req.body
-    /*const countryActivity;
-    const match = await country_activity.findAll({
-        where: {
-            activityId: activity.id
-        }
-    })*/
-    res.send(await Activity.create({
-        ...country,
+    const activity = req.body
+
+    console.log(activity)
+    const newActivity = await Activity.create({
+        ...activity,
         id: uuidv4()
-    }))
+    })
+    const countries = await Country.findAll({
+        where: { name: { [Op.in]: activity.countries } }
+    })
+    await newActivity.addCountry(countries)
+    res.send(newActivity)
 })
 
 
