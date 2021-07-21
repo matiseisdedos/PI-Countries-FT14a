@@ -14,6 +14,13 @@ import { filterContinent } from "../../store/actions/getContinents";
 
 function CountriesCards({ countries, getCountries, searchCountries, search, getOrder, filterContinent }) {
 
+    const [paises, setPaises] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [paisesPorPagina, setPaisesPorPagina] = useState(10);
+
+
+
     function getCountriesFunction() {
         getCountries();
     }
@@ -47,34 +54,38 @@ function CountriesCards({ countries, getCountries, searchCountries, search, getO
 
     return (
         <>
-            <form onSubmit={handleOnSubmit}>
-                <input placeholder="Busqueda..." name="search" onChange={handleChange} />
-                <button><IoIosSearch /></button>
-            </form>
 
-            <form onSubmit={handleOnSubmitOrder}>
-                <select onChange={handleChange} name="orden">
-                    <option selected disabled>Seleccione</option>
-                    <option value="DESCP"> Mayor Poblacion</option>
-                    <option value="ASCP"> Menor Poblacion</option>
-                    <option value="ASC"> Nombre A-Z</option>
-                    <option value="DESC"> Nombre Z-A</option>
-                </select>
+            <div className="filtrados">
+                <form onSubmit={handleOnSubmitOrder}>
+                    <select onChange={handleChange} name="orden">
+                        <option selected disabled>Seleccione</option>
+                        <option value="DESCP"> Mayor Poblacion</option>
+                        <option value="ASCP"> Menor Poblacion</option>
+                        <option value="ASC"> Nombre A-Z</option>
+                        <option value="DESC"> Nombre Z-A</option>
+                    </select>
 
-                <button>Ordenar</button>
-            </form>
-            <form onSubmit={handleOnSubmitFilter}>
-                <select onChange={handleChange} name="filter" >
-                    <option selected disabled>Seleccione...</option>
-                    <option value="Africa">Africa</option>
-                    <option value="Americas">Americas</option>
-                    <option value="Asia">Asia</option>
-                    <option value="Europe">Europe</option>
-                    <option value="Polar">Polar</option>
-                    <option value="Oceania">Oceania</option>
-                </select>
-                <button>Ordenar</button>
-            </form>
+                    <button>Ordenar</button>
+                </form>
+
+                <form onSubmit={handleOnSubmit}>
+                    <input placeholder="Busqueda..." name="search" onChange={handleChange} />
+                    <button><IoIosSearch /></button>
+                </form>
+
+                <form onSubmit={handleOnSubmitFilter}>
+                    <select onChange={handleChange} name="filter" >
+                        <option selected disabled>Seleccione...</option>
+                        <option value="Africa">Africa</option>
+                        <option value="Americas">Americas</option>
+                        <option value="Asia">Asia</option>
+                        <option value="Europe">Europe</option>
+                        <option value="Polar">Polar</option>
+                        <option value="Oceania">Oceania</option>
+                    </select>
+                    <button>Ordenar</button>
+                </form>
+            </div>
             {/* <button type="submit" name="orden" value="DESCP" onClick={handleChange, handleOnSubmit}>Orden</button> */}
             <div className="cards">
                 {countries.map(c => <PaisCard

@@ -5,7 +5,7 @@ import "./paisCard.modules.css"
 export default function CountryCard({ id, name, imgflag, region }) {
     return (
         <div className="pais" key={id}>
-            <Link to={`/countries/${id}`}>{name}
+            <Link to={`/app/countries/${id}`}>{name}
                 <br />
                 <img src={imgflag} alt="No hay bandera" height="100" />
             </Link>
