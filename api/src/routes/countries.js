@@ -44,12 +44,10 @@ router.get('/countries/:id', async (req, res) => {
     let database = await Country.findAll({
         where: {
             id: idbase
-        }
+        },
+        include: Activity
     })
-    let activities = await Activity.findAll({ where: { id: idbase } })
-    console.log(activities)
-    let all = [...database, ...activities]
-    res.send(all)
+    res.send(database)
     //res.send(database.filter(e => e.id === id))
     // falta agregar actividades de la base de datos
 })
