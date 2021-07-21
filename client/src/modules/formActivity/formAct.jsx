@@ -8,12 +8,15 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
     // function addActivityFunction() {
     //     addActivity();
     // }
+    // const [loading, setLoading] = useState(1)
+
     async function getCountriesFunction() {
         await getCountries();
     }
 
-    useEffect(() => {
-        getCountriesFunction()
+    useEffect(async () => {
+        //getCountriesFunction()
+        await getCountriesFunction()
         console.log(countries)
     }, [])
 
@@ -34,7 +37,7 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
         level: '',
         length: '',
         season: '',
-        countries: ''
+        countries: []
     })
     function handleChange(e) {
         setState({
@@ -42,6 +45,20 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
             [e.target.name]: e.target.value
         })
     }
+    async function handleAddCountries(e) {
+        var paises = await state.countries.find(el => el === e.target.value)
+        if (!paises && e.target.value !== '0') {
+            let data = [...state.countries];
+            data.push(e.target.value);
+            setState({ ...state, countries: data });
+            console.log('estas seleccionando:' + e.target.value)
+        }
+        else {
+            alert('El pais ya fue agregado')
+        }
+
+    }
+
     return (
         <>
             <form onSubmit={handleOnSubmit}>
@@ -63,11 +80,11 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
                     <option>Spring</option>
                 </select>
                 <br></br>
-                <select>
+                <select onChange={handleAddCountries}>
                     {
-                        countries.map(e => {
-                            <option>{e.name}</option>
-                        })
+                        countries?.map(e =>
+                            <option value={e.name} key={e.name}>{e.name}</option>
+                        )
                     }
                 </select>
                 <br></br>
@@ -77,6 +94,7 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
         </>
     )
 }
+
 
 const mapStateToProps = state => {
     return {
