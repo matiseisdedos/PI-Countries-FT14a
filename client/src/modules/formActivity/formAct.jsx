@@ -17,7 +17,6 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
     useEffect(async () => {
         //getCountriesFunction()
         await getCountriesFunction()
-        console.log(countries)
     }, [])
 
     const handleOnSubmit = function (e) {
@@ -46,7 +45,7 @@ function FormAct({ countries, activities, addActivity, getCountries }) {
         })
     }
     async function handleAddCountries(e) {
-        var paises = await state.countries.find(el => el === e.target.value)
+        var paises = await state.countries?.find(el => el === e.target.value)
         if (!paises && e.target.value !== '0') {
             let data = [...state.countries];
             data.push(e.target.value);

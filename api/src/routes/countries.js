@@ -39,14 +39,17 @@ router.get("/countries", async (req, res) => {
     Incluir los datos de las actividades turísticas correspondientes
 */
 
-router.get('/countries/:id', async (req, res) => {
+
+
+router.get('/countries/:id', (req, res) => {
     let idbase = req.params.id
-    let database = await Country.findAll({
+    let database = Country.findAll({
         where: {
             id: idbase
         },
         include: Activity
     })
+
     res.send(database)
     //res.send(database.filter(e => e.id === id))
     // falta agregar actividades de la base de datos

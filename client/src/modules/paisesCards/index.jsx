@@ -18,9 +18,6 @@ function CountriesCards({ countries, getCountries, searchCountries, search, getO
     // const [currentPage, setCurrentPage] = useState(1);
     // const [paisesPorPagina, setPaisesPorPagina] = useState(10);
 
-
-
-
     useEffect(() => {
         getCountries()
     }, [])
@@ -85,7 +82,7 @@ function CountriesCards({ countries, getCountries, searchCountries, search, getO
             </div>
             {/* <button type="submit" name="orden" value="DESCP" onClick={handleChange, handleOnSubmit}>Orden</button> */}
             <div className="cards">
-                {countries.map(c => <PaisCard
+                {countries?.map(c => <PaisCard
                     id={c.id}
                     key={c.id}
                     name={c.name}

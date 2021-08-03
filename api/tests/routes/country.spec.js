@@ -25,9 +25,9 @@ const activity = {
 
 describe('Country routes', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
   beforeEach(() => Country.sync({ force: true })
     .then(() => Country.create(country)));
   describe('GET /countries', () => {
@@ -39,9 +39,9 @@ describe('Country routes', () => {
 
 describe('Activities route', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
   beforeEach(() => Country.sync({ force: true })
     .then(() => Country.create(country)));
   describe('GET /activity', () => {
@@ -53,23 +53,23 @@ describe('Activities route', () => {
 
 describe('Details route', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
   beforeEach(() => Country.sync({ force: true })
     .then(() => Country.create(country)));
   describe('GET /countries/:id', () => {
     it('should get 200', () =>
-      agent.get('/countries/ARG').expect(200)
+      agent.get('/countries/6ffad17b-7d34-43eb-b96c-e777425bab52').expect(200)
     );
   });
 });
 
 describe('Activity route', () => {
   before(() => conn.authenticate()
-  .catch((err) => {
-    console.error('Unable to connect to the database:', err);
-  }));
+    .catch((err) => {
+      console.error('Unable to connect to the database:', err);
+    }));
   beforeEach(() => Country.sync({ force: true })
     .then(() => Country.create(country)));
   describe('POST /activity', () => {

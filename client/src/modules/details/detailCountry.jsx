@@ -13,7 +13,6 @@ function DetailCountry(props) {
         detailCountryFunction(id)
 
     }, [])
-    console.log(props)
     return (
         <>
             {/*id, name, flag, region, capital, subregion, area, population }*/}
@@ -28,7 +27,7 @@ function DetailCountry(props) {
             <div className='activities'>
                 {
                     props.country.activities?.map(e =>
-                        <div className="activity">
+                        <div className="activity" key={e.id}>
                             <h3>{e.name}</h3>
                             <p>Difficulty: {e.level}</p>
                             <p>Length: {e.length} hs</p>
